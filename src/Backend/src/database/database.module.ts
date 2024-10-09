@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Init1728484301569 } from './migrations/1728484301569-init';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         synchronize: false,
         maxQueryExecutionTime: 1000,
         migrationsRun: true,
+        migrations: [Init1728484301569],
       }),
       inject: [ConfigService],
     }),
