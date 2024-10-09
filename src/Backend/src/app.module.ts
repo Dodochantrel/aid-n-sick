@@ -6,7 +6,11 @@ import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), AuthModule, DatabaseModule],
+  imports: [
+    ConfigModule.forRoot({ envFilePath: ['.env', '.env.local'] }),
+    AuthModule,
+    DatabaseModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
