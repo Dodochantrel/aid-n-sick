@@ -16,7 +16,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<string> {
     const user = await this.repository.findOne({ where: { email } });
     // Crypter le mot de passe et le comparer avec celui de la base de données
     await this.checkPassword(password, user.password);
@@ -27,6 +27,15 @@ export class AuthService {
       email: user.email,
     };
     return this.jwtService.sign(jwtPayload);
+  }
+
+  async register(
+    email: string,
+    password: string,
+    username: string,
+  ): Promise<User> {
+    const user = new User(email, this.hashPassword(password), username);
+    return await this.repository.save(user);
   }
 
   private async checkPassword(password: string, hash: string) {
