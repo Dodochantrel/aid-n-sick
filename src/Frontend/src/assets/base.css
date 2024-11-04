@@ -93,3 +93,22 @@ main {
 footer {
   height: 10%;
 }
+
+button {
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px; /* Ajoute un léger arrondi */
+  }
+  
+  button:hover {
+    transform: scale(1.05); /* Légère mise en relief */
+  }
+  
+  button:active {
+    transform: scale(0.98); /* Effet de clic */
+  }

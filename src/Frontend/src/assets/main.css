@@ -1,4 +1,6 @@
 @import './base.css';
+@import '../styles/header.css';
+@import '../styles/footer.css';
 
 #app {
   width: 100%;
