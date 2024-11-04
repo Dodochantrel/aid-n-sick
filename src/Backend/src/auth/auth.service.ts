@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { User } from './user.auth';
+import { User } from './user.entity';
 import { AppError } from 'src/error/app-error.exception';
 import * as bcrypt from 'bcrypt';
 
@@ -24,11 +24,11 @@ export class AuthService {
   }
 
   async register(
+    username: string,
     email: string,
     password: string,
-    username: string,
   ): Promise<User> {
-    const user = new User(email, this.hashPassword(password), username);
+    const user = new User(username, await this.hashPassword(password), email);
     return await this.repository.save(user);
   }
 
