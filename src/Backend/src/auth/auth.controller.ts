@@ -28,7 +28,7 @@ export class AuthController {
   @Post('register')
   @ApiBody({ type: QueryRegisterDto })
   async register(@Body() dto: QueryRegisterDto) {
-    await this.authService.register(dto.userame, dto.email, dto.password);
+    await this.authService.register(dto.username, dto.email, dto.password);
     return {
       message: 'User registered',
       status: 201,

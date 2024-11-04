@@ -2,11 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class QueryRegisterDto {
   @ApiProperty({
-    description: 'Email of the user',
+    description: 'Usename of the user',
     example: 'Toto',
     required: true,
   })
-  userame: string;
+  username: string;
 
   @ApiProperty({
     description: 'Email of the user',
