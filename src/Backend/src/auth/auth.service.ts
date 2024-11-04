@@ -20,13 +20,7 @@ export class AuthService {
     const user = await this.repository.findOne({ where: { email } });
     // Crypter le mot de passe et le comparer avec celui de la base de données
     await this.checkPassword(password, user.password);
-    const jwtPayload = {
-      username: user.username,
-      id: user.id,
-      auth_time: new Date().getTime(),
-      email: user.email,
-    };
-    return this.jwtService.sign(jwtPayload);
+    return this.generateToken(user);
   }
 
   async register(
@@ -47,5 +41,15 @@ export class AuthService {
 
   hashPassword(password: string) {
     return bcrypt.hash(password, SALTORROUNDS);
+  }
+
+  generateToken(user: User) {
+    const jwtPayload = {
+      username: user.username,
+      id: user.id,
+      auth_time: new Date().getTime(),
+      email: user.email,
+    };
+    return this.jwtService.sign(jwtPayload);
   }
 }
