@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 const isRegisterMode = ref(false); // Toggle between login and register modes
+const router = useRouter();
 
 // Data for login and registration
 const registerData = ref({
@@ -52,7 +54,36 @@ const toggleAuthMode = () => {
 };
 
 // Placeholder methods for handling login and registration
-const handleLogin = () => {
+const handleLogin = async () => {
+  errorMessage.value = '';
+  successMessage.value = '';
+
+  try {
+    const response = await fetch('http://localhost:3000/auth/login', { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginData.value),
+    });
+
+    if (!response.ok) {
+      // Si la réponse est incorrecte (erreur du serveur ou autre)
+      const errorData = await response.json();
+      errorMessage.value = errorData.message || 'Une erreur est survenue lors de la connexion';
+      return;
+    }
+
+    // Si l'inscription est réussie
+    successMessage.value = 'Connexion réussie !';
+    loginData.value = { username: '', password: '' }; // Réinitialiser les champs
+    router.push('/home');
+  } catch (error) {
+    // Si une erreur réseau ou autre se produit
+    errorMessage.value = 'Une erreur réseau est survenue. Veuillez réessayer.';
+    console.error(error);
+  }
+
   console.log("Logging in with:", loginData.value);
 };
 
@@ -79,6 +110,7 @@ const handleRegister = async () => {
     // Si l'inscription est réussie
     successMessage.value = 'Inscription réussie !';
     registerData.value = { username: '', email: '', password: '' }; // Réinitialiser les champs
+    toggleAuthMode();
   } catch (error) {
     // Si une erreur réseau ou autre se produit
     errorMessage.value = 'Une erreur réseau est survenue. Veuillez réessayer.';

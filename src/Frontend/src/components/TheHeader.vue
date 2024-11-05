@@ -13,7 +13,9 @@
   
       <div class="header-container__profil">
         <button v-if="isLoggedIn">Se déconnecter</button>
-        <button v-else>Se connecter</button>
+        <router-link  v-else to="/auth">
+          <button>Se connecter</button>
+        </router-link>
       </div>
     </div>
   </header>
@@ -23,7 +25,7 @@
   export default {
     data() {
       return {
-        isLoggedIn: true,
+        isLoggedIn: false,
         isAdmin: false // Par exemple, une autre variable pour gérer l'état d'admin
       };
     }

@@ -103,10 +103,13 @@ button {
     font-size: 16px;
     cursor: pointer;
     border-radius: 8px; /* Ajoute un léger arrondi */
+    background-color: #42b983;
+    color: white;
   }
   
   button:hover {
     transform: scale(1.05); /* Légère mise en relief */
+    background-color: #38a174;
   }
   
   button:active {
