@@ -16,8 +16,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(email: string, password: string): Promise<string> {
-    const user = await this.repository.findOne({ where: { email } });
+  async login(username: string, password: string): Promise<string> {
+    const user = await this.repository.findOne({ where: { username } });
     // Crypter le mot de passe et le comparer avec celui de la base de données
     await this.checkPassword(password, user.password);
     return this.generateToken(user);

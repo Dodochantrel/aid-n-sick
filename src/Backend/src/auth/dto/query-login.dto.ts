@@ -2,11 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class QueryLoginDto {
   @ApiProperty({
-    description: 'Email of the user',
+    description: 'username of the user',
     example: 'test@test.test',
     required: true,
   })
-  email: string;
+  username: string;
 
   @ApiProperty({
     description: 'Password of the user',
