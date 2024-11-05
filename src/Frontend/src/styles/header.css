@@ -9,3 +9,11 @@
 header {
     border-bottom: 1px solid rgb(227, 227, 227);
 }
+
+.header-container__deconnexion {
+    background-color: red;
+}
+
+.header-container__deconnexion:hover {
+    background-color: rgb(227, 36, 36);
+  }

@@ -1,4 +1,5 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
 
 <template>
   <header>
@@ -12,7 +13,7 @@
       </div>
   
       <div class="header-container__profil">
-        <button v-if="isLoggedIn">Se déconnecter</button>
+        <button v-if="isLoggedIn()" class="header-container__deconnexion" @click="deconnexion">Se déconnecter</button>
         <router-link  v-else to="/auth">
           <button>Se connecter</button>
         </router-link>
@@ -23,11 +24,14 @@
 
 <script>
   export default {
-    data() {
-      return {
-        isLoggedIn: false,
-        isAdmin: false // Par exemple, une autre variable pour gérer l'état d'admin
-      };
+    methods: {
+      isLoggedIn() {
+        return localStorage?.getItem('token') !== null;
+      },
+      deconnexion() {
+        localStorage?.removeItem('token');
+        this.$forceUpdate();
+      }
     }
   };
 </script>

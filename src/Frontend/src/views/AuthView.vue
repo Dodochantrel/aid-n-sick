@@ -75,6 +75,10 @@ const handleLogin = async () => {
     }
 
     // Si l'inscription est réussie
+    const data = await response?.json();
+    
+    // On sauvegarde dans le localStorage le token
+    localStorage?.setItem('token', data?.access_token);
     successMessage.value = 'Connexion réussie !';
     loginData.value = { username: '', password: '' }; // Réinitialiser les champs
     router.push('/home');
@@ -83,8 +87,6 @@ const handleLogin = async () => {
     errorMessage.value = 'Une erreur réseau est survenue. Veuillez réessayer.';
     console.error(error);
   }
-
-  console.log("Logging in with:", loginData.value);
 };
 
 const handleRegister = async () => {
